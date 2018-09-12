@@ -86,7 +86,13 @@ postgresql_server__delegate_to: '{{ inventory_hostname }}'
 # .. envvar:: postgresql_server__listen_addresses [[[
 #
 # List of IP addresses on which PostgreSQL clusters will listen for TCP
-# connections by default.
+# connections by default. To allow connections from remote hosts, you need
+# to change the list to include ``0.0.0.0`` for IPv4 only connections,
+# or ``*`` for IPv4 and IPv6 connections.
+#
+# When listen addresses are changed, you need to restart the
+# :program:`postgresql` daemon to rebind it to new network interfaces, it
+# won't be restarted automatically by Ansible.
 postgresql_server__listen_addresses: [ 'localhost' ]
 
                                                                    # ]]]
